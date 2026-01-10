@@ -15,7 +15,15 @@ export default function CompletedTasks() {
         return (
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50 to-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-10">
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">✅ Completed Tasks</h1>
+                    <div className="flex items-center gap-4 mb-6">
+                        <a
+                            href="/tasks"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow active:scale-95"
+                        >
+                            ← Back
+                        </a>
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">✅ Completed Tasks</h1>
+                    </div>
                     <div className="text-center py-16 md:py-20 bg-white rounded-2xl shadow-sm border border-gray-200">
                         <div className="text-6xl md:text-7xl mb-4">🎉</div>
                         <p className="text-gray-500 text-base md:text-lg font-medium">No completed tasks yet.</p>
@@ -30,6 +38,14 @@ export default function CompletedTasks() {
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50 to-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-10">
                 <div className="mb-8 md:mb-10">
+                    <div className="flex items-center gap-4 mb-4">
+                        <a
+                            href="/tasks"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow active:scale-95"
+                        >
+                            ← Back
+                        </a>
+                    </div>
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">✅ Completed Tasks</h1>
                     <p className="text-sm md:text-base text-gray-600">You've completed {completedTasks.length} {completedTasks.length === 1 ? 'task' : 'tasks'}. Great job! 🎊</p>
                 </div>
