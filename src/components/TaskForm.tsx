@@ -45,7 +45,7 @@ export default function TaskForm({ initialData, onSubmit }: any) {
                     📝 Task Title *
                 </label>
                 <input
-                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 placeholder:text-grey-500 text-black"
                     placeholder="Enter task title..."
                     value={title}
                     onChange={e => setTitle(e.target.value)}
@@ -58,7 +58,7 @@ export default function TaskForm({ initialData, onSubmit }: any) {
                     📄 Description
                 </label>
                 <textarea
-                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 min-h-[100px] resize-none"
+                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 min-h-[100px] resize-none placeholder:text-grey-500 text-black"
                     placeholder="Add details about your task..."
                     value={description}
                     onChange={e => setDescription(e.target.value)}
@@ -71,7 +71,7 @@ export default function TaskForm({ initialData, onSubmit }: any) {
                     🎯 Status
                 </label>
                 <select
-                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 cursor-pointer"
+                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 cursor-pointer placeholder:text-grey-500 text-black"
                     value={status}
                     onChange={e => setStatus(e.target.value as TaskStatus)}
                 >
@@ -88,7 +88,7 @@ export default function TaskForm({ initialData, onSubmit }: any) {
                 </label>
                 <input
                     type="date"
-                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 cursor-pointer"
+                    className="w-full border-2 border-gray-300 bg-gray-50 px-4 py-3 rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400 cursor-pointer placeholder:text-grey-500 text-black"
                     value={dueDate}
                     onChange={e => setDueDate(e.target.value)}
                 />
