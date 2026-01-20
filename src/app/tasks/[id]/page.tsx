@@ -2,7 +2,7 @@
 import { useHydrateTasks } from "@/hooks/useHydrateTasks";
 import { RootState } from "@/redux/store";
 import { useParams, useRouter } from "next/navigation"
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 const TaskDetailsPage = () => {
@@ -11,10 +11,14 @@ const TaskDetailsPage = () => {
 
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
     const task = tasks.find(t => t.id === id);
-    console.log(task, tasks)
     const router = useRouter();
+    const mounted = useRef(false);
 
     useEffect(() => {
+        if (!mounted.current) {
+            mounted.current = true
+            return
+        }
         if (!task) {
             router.push('/error')
         }
