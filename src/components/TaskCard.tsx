@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function TaskCard({ task, onEdit, onDelete }: any) {
     const statusConfig = {
         "Pending": {
@@ -23,9 +25,12 @@ export default function TaskCard({ task, onEdit, onDelete }: any) {
     };
 
     const config = statusConfig[task.status as keyof typeof statusConfig];
+    const router = useRouter();
 
     return (
-        <div className={`bg-gradient-to-br ${config.bg} p-5 md:p-6 rounded-xl md:rounded-2xl shadow-md hover:shadow-xl border-2 ${config.border} transition-all duration-300 hover:scale-105 hover:-translate-y-1 group flex flex-col h-full`}>
+        <div
+            onClick={() => router.push(`/tasks/${task.id}`)}
+            className={`bg-gradient-to-br ${config.bg} p-5 md:p-6 rounded-xl md:rounded-2xl shadow-md hover:shadow-xl border-2 ${config.border} transition-all duration-300 hover:scale-105 hover:-translate-y-1 group flex flex-col h-full`}>
             <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex items-start gap-3 flex-1">
                     <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{config.icon}</span>

@@ -14,11 +14,13 @@ export default function TaskList() {
     const dispatch = useDispatch();
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | null>(null);
     const [statusFilter, setStatusFilter] = useState<
         "All" | "Pending" | "In Progress" | "Completed"
     >("All");
+    const [isaztrue, setIsAztrue] = useState(false);
 
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
@@ -26,27 +28,30 @@ export default function TaskList() {
 
 
     const visibleTasks = useMemo(() => {
+
         let result = [...tasks];
 
-        // 🔹 FILTER BY STATUS
-        if (statusFilter !== "All") {
-            result = result.filter(task => task.status === statusFilter);
+        if (!isaztrue) {
+            if (statusFilter !== "All") {
+                result = result.filter(task => task.status === statusFilter);
+            }
+
+
+
+
+            result.sort((a, b) => {
+                const dateA = new Date(a.dueDate).getTime();
+                const dateB = new Date(b.dueDate).getTime();
+
+                return sortOrder === "asc"
+                    ? dateA - dateB
+                    : dateB - dateA;
+            });
         }
-
-        // 🔹 SORT BY DUE DATE
-        result.sort((a, b) => {
-            const dateA = new Date(a.dueDate).getTime();
-            const dateB = new Date(b.dueDate).getTime();
-
-            return sortOrder === "asc"
-                ? dateA - dateB
-                : dateB - dateA;
-        });
 
         return result;
     }, [tasks, statusFilter, sortOrder]);
 
-    // 🔹 LOAD FROM LOCAL STORAGE (ON FIRST REAL MOUNT)
     useEffect(() => {
         const stored = localStorage.getItem("tasks");
 
@@ -54,16 +59,12 @@ export default function TaskList() {
 
             dispatch(setTasks(JSON.parse(stored)));
         }
-
-
     }, []);
 
-
-    // 🔹 SAVE ONLY AFTER HYDRATION
     useEffect(() => {
         if (!didMount.current) {
             didMount.current = true;
-            return; // skip only initial mount
+            return;
         }
 
         localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -83,6 +84,7 @@ export default function TaskList() {
         dispatch(deleteTask(id));
     };
 
+
     return (
         <>
 
@@ -96,7 +98,20 @@ export default function TaskList() {
                 </button>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
-                {/* STATUS FILTER */}
+                <button className="border p-2 rounded"
+                    onClick={() => {
+                        setIsAztrue(!isaztrue)
+                        const azsortedtitleTasks = [...tasks].sort((a, b) => {
+                            if (a.title > b.title) return 1
+                            if (a.title < b.title) return -1
+                            return 0
+                        })
+
+                        dispatch(setTasks(azsortedtitleTasks))
+
+                    }}
+                >A-Z</button>
+
                 <select
                     value={statusFilter}
                     onChange={e => setStatusFilter(e.target.value as any)}
@@ -108,7 +123,7 @@ export default function TaskList() {
                     <option value="Completed">✅ Completed</option>
                 </select>
 
-                {/* SORT BY DATE */}
+
                 <select
                     value={sortOrder}
                     onChange={e => setSortOrder(e.target.value as "asc" | "desc")}
